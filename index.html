@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <style>
+      body,
+      html {
+        margin: 20px;
+        background: hwb(0 15% 95% / 1);
+        color: white;
+      }
+      img,
+      svg,
+      i {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+      }
+      section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <pre>
+      This is a static page
+      there is no bundler or bundling involved
+    </pre>
+    <pre>
+      ✅ - works
+      🟡 - can be fixed
+      🔶 - partially works 
+      ❌ - doesn't work
+    </pre>
+    <h2>&#60;img&#62;</h2>
+    <section>
+      fragment id: ❌
+      <img src="./sprites.svg#twitter" />
+      view id: ✅
+      <img src="./sprites.svg#twitter-view" />
+      position: ✅
+      <img src="./sprites.svg#svgView(viewBox(0,0,32,32))" />
+    </section>
+
+    <h2>
+      background: url()
+    </h2>
+    <section>
+      fragment id: ✅
+      <i style="background: url('./sprites.svg#twitter');"></i>
+      view id: 🟡
+      <i style="background: url('./sprites.svg#twitter-view');"></i>
+      position: 🟡
+      <i style="background: url('./sprites.svg#svgView(viewBox(0,0,32,32))');"></i>
+    </section>
+
+    <h2>
+      &#60;use&#62;
+    </h2>
+    <section>
+      fragment id: 🔶
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <use href="./sprites.svg#twitter" />
+      </svg>
+      view id: ❌
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <use href="./sprites.svg#twitter-view" />
+      </svg>
+      position: ❌
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <use href="./sprites.svg#svgView(viewBox(0,32,32,32))" />
+      </svg>
+    </section>
+  </body>
+</html>
